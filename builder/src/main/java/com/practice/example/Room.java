@@ -26,16 +26,19 @@ public class Room {
 class RoomBuilder {
 	private Room room = new Room();
 	
-	public void addFan(Fan fan) {
+	public RoomBuilder addFan(Fan fan) {
 		room.ceilingFan = fan;
+		return this;
 	}
 	
-	public void addTubelight(Tubelight tubelight) {
+	public RoomBuilder addTubelight(Tubelight tubelight) {
 		room.tubeLight = tubelight;
+		return this;
 	}
 	
-	public void addTv(TV tv) {
+	public RoomBuilder addTv(TV tv) {
 		room.tv = tv;
+		return this;
 	}
 	
 	public void clear() {
