@@ -9,13 +9,12 @@ public class BuilderDemo {
 		Tubelight tubelight = new Tubelight("Havells", (byte) 20);
 		TV tv = new TV("Sony", "LED");
 
-		bedBuilder
+		Room room = bedBuilder
 			.addFan(fan)
-			.addBed(bed)
 			.addTubelight(tubelight)
-			.addTv(tv);
-
-		Room room = bedBuilder.build();
+			.addTv(tv)
+			.addBed(bed)
+			.build();
 
 		System.out.println("Room - " + room);
 	}
