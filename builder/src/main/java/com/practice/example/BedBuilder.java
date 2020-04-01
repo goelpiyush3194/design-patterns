@@ -1,13 +1,12 @@
 package com.practice.example;
 
-class BedBuilder extends RoomBuilder<BedBuilder> {
-	public BedBuilder addBed(Bed bed) {
-		room.bed = bed;
-		return this;
+class BedBuilder extends RoomBuilder {
+	public BedBuilder(Room room) {
+		this.room = room;
 	}
 
-	@Override
-	protected BedBuilder self() {
+	public BedBuilder manufacturesBed(Bed bed) {
+		room.bed = bed;
 		return this;
 	}
 	

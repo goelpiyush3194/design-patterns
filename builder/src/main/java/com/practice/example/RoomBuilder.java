@@ -1,28 +1,25 @@
 package com.practice.example;
 
-public class RoomBuilder<SELF extends RoomBuilder<SELF>> {
+public class RoomBuilder {
 	protected Room room = new Room();
 	
-	public SELF addFan(Fan fan) {
+	public RoomBuilder addFan(Fan fan) {
 		room.ceilingFan = fan;
-		return self();
+		return this;
 	}
 	
-	public SELF addTubelight(Tubelight tubelight) {
+	public RoomBuilder addTubelight(Tubelight tubelight) {
 		room.tubeLight = tubelight;
-		return self();
+		return this;
 	}
 	
-	public SELF addTv(TV tv) {
+	public RoomBuilder addTv(TV tv) {
 		room.tv = tv;
-		return self();
+		return this;
 	}
 	
-	// unchecked cast, but actually safe
-    // proof: try sticking a non-RoomBuilder
-    //        as SELF parameter; it won't work!
-	protected SELF self() {
-		return (SELF) this;
+	public BedBuilder addBed() {
+		return new BedBuilder(room);
 	}
 	
 	public void clear() {
