@@ -2,18 +2,20 @@ package com.practice.example;
 
 public class BuilderDemo {
 	public static void main(String args[]) {
-		RoomBuilder roomBuilder = new RoomBuilder();
+		BedBuilder bedBuilder = new BedBuilder();
 
 		Fan fan = new Fan("Havells", 1500);
+		Bed bed = new Bed("Velvet", "square");
 		Tubelight tubelight = new Tubelight("Havells", (byte) 20);
 		TV tv = new TV("Sony", "LED");
 
-		roomBuilder
+		bedBuilder
 			.addFan(fan)
+			.addBed(bed)
 			.addTubelight(tubelight)
 			.addTv(tv);
 
-		Room room = roomBuilder.build();
+		Room room = bedBuilder.build();
 
 		System.out.println("Room - " + room);
 	}

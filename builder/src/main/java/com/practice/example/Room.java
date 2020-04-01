@@ -1,44 +1,42 @@
 package com.practice.example;
 
-
+//builder inheritance with recursive generics
 public class Room {
-	public Fan ceilingFan;
-	public Tubelight tubeLight;
-	public TV tv;
-	
-	public Room() {
-		
-	}
-
-	public Room(Fan ceilingFan, Tubelight tubeLight, TV tv) {
-		this.ceilingFan = ceilingFan;
-		this.tubeLight = tubeLight;
-		this.tv = tv;
-	}
+	Fan ceilingFan;
+	Tubelight tubeLight;
+	TV tv;
+	Bed bed;
 
 	@Override
 	public String toString() {
-		return "Room [ceilingFan=" + ceilingFan + "\ntubeLight=" + tubeLight + "\ntv=" + tv + "]";
+		return "Room [ceilingFan=" + ceilingFan + ", tubeLight=" + tubeLight + ", tv=" + tv + ", bed=" + bed + "]";
 	}
-	
+
 }
 
-class RoomBuilder {
-	private Room room = new Room();
+class RoomBuilder<SELF extends RoomBuilder<SELF>> {
+	protected Room room = new Room();
 	
-	public RoomBuilder addFan(Fan fan) {
+	public SELF addFan(Fan fan) {
 		room.ceilingFan = fan;
-		return this;
+		return self();
 	}
 	
-	public RoomBuilder addTubelight(Tubelight tubelight) {
+	public SELF addTubelight(Tubelight tubelight) {
 		room.tubeLight = tubelight;
-		return this;
+		return self();
 	}
 	
-	public RoomBuilder addTv(TV tv) {
+	public SELF addTv(TV tv) {
 		room.tv = tv;
-		return this;
+		return self();
+	}
+	
+	// unchecked cast, but actually safe
+    // proof: try sticking a non-RoomBuilder
+    //        as SELF parameter; it won't work!
+	protected SELF self() {
+		return (SELF) this;
 	}
 	
 	public void clear() {
@@ -47,6 +45,20 @@ class RoomBuilder {
 
 	public Room build() {
 		return room;
+	}
+	
+}
+
+class BedBuilder extends RoomBuilder<BedBuilder> {
+	
+	public BedBuilder addBed(Bed bed) {
+		room.bed = bed;
+		return self();
+	}
+
+	@Override
+	protected BedBuilder self() {
+		return this;
 	}
 	
 }
